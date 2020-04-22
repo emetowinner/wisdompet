@@ -1,0 +1,29 @@
+{% extends 'adoptions/base.html' %}
+
+{% block content %}
+    <div>
+        <h3>Name: {{ pet.name|capfirst }}</h3>
+        <p>Species: {{ pet.species }}</p>
+        <p>Description: {{ pet.description }}</p>
+        {% if pet.breed %}
+            <p>Breed: {{ pet.breed }}</p>
+        {% endif %}
+        {% if pet.age %}
+            <p>Age: {{ pet.age }}</p>
+        {% endif %}
+        {% if pet.sex %}
+            <p>Sex: {{ pet.sex }}</p>
+        {% endif %}
+
+        {% if pet.vaccinations.all %}
+            <p>Vaccinations for:</p>
+            <ul>
+                {% for vaccination in pet.vaccinations.all %}
+                    <li>{{ vaccination.name }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <p>Submitted by: <b>{{ pet.submitter }}</b></p>
+        <p>Submitted on: {{ pet.submission_date|date:"M d Y" }}</p>
+    </div>
+{% endblock %}
